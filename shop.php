@@ -1,3 +1,9 @@
+<?php
+include 'connection.php';
+$sql = 'SELECT * FROM fruits';
+$result = mysqli_query($connection, $sql) or trigger_error("Failed SQL" . mysqli_error($connection, E_USER_ERROR));
+$row = mysqli_fetch_array($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +50,33 @@
                 Shop
             </h1>
             <div class="mt-14"></div>
+        </div>
+    </section>
+    <!-- products -->
+    <section class="h-auto px-32 py-20 flex flex-col justify-center items-center text-center gap-4 bg-yellow-50" id="product">
+        <h1 class="font-bold text-5xl text-orange-600 leading-normal">
+            Our <span class="text-gray-800">Products</span>
+        </h1>
+        <p class="text-lg text-gray-600 w-3/5">
+            Remember to savor these seasonal delights and explore our product for
+            the freshest picks.
+        </p>
+        <div class="grid grid-cols-3 gap-10 mt-14">
+            <?php
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+                <div class="rounded-md shadow-xl bg-white flex flex-col">
+                    <img src="src/img/fruits.jpg" alt="fruits" />
+                    <div class="flex flex-col gap-2 px-5 pb-5 mt-5">
+                        <h1 class="font-bold text-xl text-gray-800"><?php echo $row['fruit_name'] ?></h1>
+                        <p class="text-md text-gray-600">Per kg</p>
+                        <h1 class="text-2xl font-bold text-gray-800"> <?php echo $row['price'] ?> &#x20B1;</h1>
+                        <a href="shop.php" class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200">Order now</a>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </section>
     <!-- footer -->
