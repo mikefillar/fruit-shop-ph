@@ -1,4 +1,5 @@
 <?php
+include 'session.php';
 include 'connection.php';
 if (isset($_POST['edit'])) {
     $fruit_id = $_POST['fruit_id'];
@@ -86,8 +87,10 @@ if (isset($_POST['update'])) {
         <!-- content -->
         <div class="col-span-10 px-10 ">
             <div class="flex justify-between py-5">
-                <h1 class="text-2xl font-semibold text-gray-800">Admin</h1>
-                <a href="#" class="px-4 py-2 bg-red-400 text-white font-semibold rounded">Logout</a>
+                <h1 class="text-2xl font-semibold text-gray-800">Admin <b class="text-orange-600"><?php echo $_SESSION['first_name'] ?></b></h1>
+                <form method="post" action="logout.php">
+                    <button type="submit" class="px-4 py-2 bg-red-400 text-white font-semibold rounded">Logout</button>
+                </form>
             </div>
             <hr>
             <h1 class="py-5 font-bold text-2xl text-gray-800">Fruit Details</h1>

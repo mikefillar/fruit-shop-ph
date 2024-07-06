@@ -1,4 +1,5 @@
 <?php
+include 'session.php';
 include 'connection.php';
 //fruits data
 $sql = 'SELECT * FROM fruits';
@@ -89,8 +90,10 @@ $stock = mysqli_fetch_array($result5);
         <!-- content -->
         <div class="col-span-10 px-10 ">
             <div class="flex justify-between py-5">
-                <h1 class="text-2xl font-semibold text-gray-800">Admin</h1>
-                <a href="#" class="px-4 py-2 bg-red-400 text-white font-semibold rounded">Logout</a>
+                <h1 class="text-2xl font-semibold text-gray-800">Admin <b class="text-orange-600"><?php echo $_SESSION['first_name'] ?></b></h1>
+                <form method="post" action="logout.php">
+                    <button type="submit" class="px-4 py-2 bg-red-400 text-white font-semibold rounded">Logout</button>
+                </form>
             </div>
             <hr>
             <h1 class="py-5 text-2xl font-bold  text-gray-800">Fruit status</h1>
@@ -145,7 +148,10 @@ $stock = mysqli_fetch_array($result5);
                                             <input type="hidden" name="fruit_id" id="fruit_id" value="<?php echo $row['fruit_id'] ?>">
                                             <button type="submit" name="edit" class="text-2xl "><ion-icon name="create-outline"></ion-icon></button>
                                         </form>
-                                        <form action="" onsubmit="return confirm('Are you sure you want to delete this fruit?')"><button type="submit" class="text-2xl text-red-500"><ion-icon name="trash-bin-outline"></ion-icon></button></form>
+                                        <form action="deletefruit.php" method="post" onsubmit="return confirm('Are you sure you want to delete this fruit?')">
+                                            <input type="hidden" name="fruit_id" id="fruit_id" value="<?php echo $row['fruit_id'] ?>">
+                                            <button type="submit" name="delete" class="text-2xl text-red-500"><ion-icon name="trash-bin-outline"></ion-icon></button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php } ?>
