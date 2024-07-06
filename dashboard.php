@@ -1,3 +1,28 @@
+<?php
+include 'connection.php';
+//fruits data
+$sql = 'SELECT * FROM fruits';
+$result = mysqli_query($connection, $sql) or trigger_error("Failed SQL" . mysqli_error($connection, E_USER_ERROR));
+$row = mysqli_fetch_array($result);
+//count fruits data
+$sql2 = 'SELECT COUNT(*) FROM fruits';
+$result2 = mysqli_query($connection, $sql2);
+$count = mysqli_fetch_array($result2);
+//sum price of fruits
+$sql3 = 'SELECT SUM(price) FROM fruits';
+$result3 = mysqli_query($connection, $sql3);
+$price = mysqli_fetch_array($result3);
+//quantity of all fruits/kg
+$sql4 = 'SELECT SUM(quantity) FROM fruits';
+$result4 = mysqli_query($connection, $sql4);
+$quantity = mysqli_fetch_array($result4);
+//total value of fruits
+$total = $price[0] * $quantity[0];
+//low stocks
+$sql5 = 'SELECT COUNT(quantity) FROM fruits WHERE quantity <= 10';
+$result5 = mysqli_query($connection, $sql5);
+$stock = mysqli_fetch_array($result5);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,11 +89,11 @@
         <!-- content -->
         <div class="col-span-10 px-10 ">
             <div class="flex justify-between py-5">
-                <h1>Admin</h1>
-                <a href="#">Logout</a>
+                <h1 class="text-2xl font-semibold text-gray-800">Admin</h1>
+                <a href="#" class="px-4 py-2 bg-red-400 text-white font-semibold rounded">Logout</a>
             </div>
             <hr>
-            <h1 class="py-5">Fruit status</h1>
+            <h1 class="py-5 text-2xl font-bold  text-gray-800">Fruit status</h1>
             <!-- status -->
             <div class="grid grid-cols-4 gap-10">
                 <div class="col-span-3 grid grid-cols-3 gap-10">
@@ -76,36 +101,54 @@
                         <span class="font-bold text-2xl"><ion-icon name="cart-outline"></ion-icon></span>
                         <div>
                             <p class="text-lg">Total Fruits</p>
-                            <p>0</p>
+                            <p> <?php print_r($count[0] - 1) ?> </p>
                         </div>
                     </div>
                     <div class="cursor-pointer border rounded flex justify-center items-center gap-10 py-2 bg-green-400 text-white">
                         <span class="font-bold text-2xl"><ion-icon name="cash-outline"></ion-icon></span>
                         <div>
                             <p class="text-lg">Total Store Value</p>
-                            <p>0</p>
+                            <p><?php echo $total ?>&#x20B1;</p>
                         </div>
                     </div>
                     <div class="cursor-pointer border rounded flex justify-center items-center gap-10 py-2 bg-red-500 text-white">
                         <span class="font-bold text-2xl"><ion-icon name="alert-circle-outline"></ion-icon></span>
                         <div>
                             <p class="text-lg">Low Stocks</p>
-                            <p>0</p>
+                            <p><?php echo $stock[0] - 1 ?></p>
                         </div>
                     </div>
-                    <table class="table-auto col-span-3 overflow-y-scroll bourder rounded">
+                    <table class="table-auto text-center col-span-3 overflow-y-scroll bourder rounded">
                         <thead>
-                            <tr>
+                            <tr class="bg-gray-800 text-white">
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Quantity(kg)</th>
                                 <th>Value</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr></tr>
+                            <?php
+                            while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                                <tr class="border-b <?php $style = $row['quantity'] <= 10 ? 'bg-red-500 text-white' : '';
+                                                    echo $style; ?>">
+                                    <td> <?php echo $row['fruit_id'] ?> </td>
+                                    <td> <?php echo $row['fruit_name'] ?> </td>
+                                    <td> <?php echo $row['price'] ?> </td>
+                                    <td> <?php echo $row['quantity'] ?> </td>
+                                    <td> <?php echo $row['price'] * $row['quantity'] ?> </td>
+                                    <td class="flex justify-center gap-2">
+                                        <form action="update.php" method="post">
+                                            <input type="hidden" name="fruit_id" id="fruit_id" value="<?php echo $row['fruit_id'] ?>">
+                                            <button type="submit" name="edit" class="text-2xl "><ion-icon name="create-outline"></ion-icon></button>
+                                        </form>
+                                        <form action="" onsubmit="return confirm('Are you sure you want to delete this fruit?')"><button type="submit" class="text-2xl text-red-500"><ion-icon name="trash-bin-outline"></ion-icon></button></form>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

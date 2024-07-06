@@ -1,5 +1,24 @@
 <?php
-include 'createfruit.php';
+include 'connection.php';
+if (isset($_POST['edit'])) {
+    $fruit_id = $_POST['fruit_id'];
+    $sql = "SELECT * FROM fruits WHERE fruit_id = $fruit_id";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc($result);
+}
+if (isset($_POST['update'])) {
+    $fruit_name = $_POST['fruit_name'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $fruit_id = $_POST['fruit_id'];
+    echo $fruit_name;
+    echo $price;
+    echo $quantity;
+    $sql = "UPDATE fruits SET fruit_name = '$fruit_name', price = $price, quantity = $quantity WHERE fruit_id = $fruit_id";
+    mysqli_query($connection, $sql);
+    echo "<script>alert('Fruit updated successfully.');</script>";
+    echo "<script>window.location.href= 'dashboard.php';</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +26,7 @@ include 'createfruit.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit Shop PH | Add Fruit</title>
+    <title>Fruit Shop PH | Update Fruit</title>
     <link rel="icon" type="image/x-icon" href="src/img/box.png" />
     <link rel="stylesheet" href="src/output.css">
     <style>
@@ -58,8 +77,8 @@ include 'createfruit.php';
         <nav class="col-span-2 bg-gray-700 flex flex-col justify-start items-center gap-10">
             <h1 class=" text-2xl font-bold text-white mt-10">Fruit Shop PH</h1>
             <ul>
-                <li><a class=" transition-all duration-200 ease-linear" href="dashboard.php"><ion-icon name="cube-outline"></ion-icon><span>Dashboard</span></a></li>
-                <li><a class="active transition-all duration-200 ease-linear" href="addfruit.php"><ion-icon name="add-circle-outline"></ion-icon><span>Add Fruit</span></a></li>
+                <li><a class="active transition-all duration-200 ease-linear" href="dashboard.php"><ion-icon name="cube-outline"></ion-icon><span>Dashboard</span></a></li>
+                <li><a class=" transition-all duration-200 ease-linear" href="addfruit.php"><ion-icon name="add-circle-outline"></ion-icon><span>Add Fruit</span></a></li>
                 <li><a class=" transition-all duration-200 ease-linear" href=""><ion-icon name="settings-outline"></ion-icon><span>Account</span></a></li>
                 <li><a class=" transition-all duration-200 ease-linear" href=""><ion-icon name="chatbox-outline"></ion-icon><span>Report Bug</span></a></li>
             </ul>
@@ -71,27 +90,27 @@ include 'createfruit.php';
                 <a href="#" class="px-4 py-2 bg-red-400 text-white font-semibold rounded">Logout</a>
             </div>
             <hr>
-            <h1 class="py-5 font-bold text-2xl text-gray-800">Add Fruit</h1>
+            <h1 class="py-5 font-bold text-2xl text-gray-800">Fruit Details</h1>
             <div class="grid grid-cols-4">
-                <p class="col-span-3 rounded px-4 <?php echo $style ?>"><?php echo $message ?></p>
-                <form class="col-span-3 grid grid-cols-2 gap-5" action="createfruit.php" method="post">
+                <form class="col-span-3 grid grid-cols-2 gap-5" action="update.php" method="post">
                     <div class="flex flex-col">
                         <label for="fruit_name">Fruit Name</label>
-                        <input class="border rounded px-4 py-2" type="text" name="fruit_name" id="fruit_name" placeholder="Enter fruit name" required>
+                        <input class="border rounded px-4 py-2" type="text" name="fruit_name" id="fruit_name" value="<?php echo $row['fruit_name'] ?>">
                     </div>
                     <div class="flex flex-col">
                         <label for="price">Price</label>
-                        <input class="border rounded px-4 py-2" type="number" name="price" id="price" placeholder="Enter price" required>
+                        <input class="border rounded px-4 py-2" type="number" name="price" id="price" value="<?php echo $row['price'] ?>">
                     </div>
                     <div class="flex flex-col">
                         <label for="quantity">Quantity(kg)</label>
-                        <input class="border rounded px-4 py-2" type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
+                        <input class="border rounded px-4 py-2" type="number" name="quantity" id="quantity" value="<?php echo $row['quantity'] ?>">
                     </div>
                     <div class="flex flex-col">
                         <label for="price">Upload Image <span class="font-sm text-gray-600"> ("This part is under construction")</span></label>
                         <input class="border rounded px-4 py-2" type="file" name="upload_image" id="upload_image">
                     </div>
-                    <button type="submit" name="add" class="bg-blue-400 py-2 rounded font-bold text-white">Add Fruit</button>
+                    <button type="submit" name="update" class="bg-blue-400 py-2 rounded font-bold text-white">Update Fruit</button>
+                    <input type="hidden" name="fruit_id" id="fruit_id" value="<?php echo $row['fruit_id'] ?>">
                 </form>
             </div>
         </div>
