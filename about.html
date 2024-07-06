@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .body {
+        overflow-x: hidden;
+      }
+
+      .active {
+        color: #fb8047;
+      }
+
+      #promo2 {
+        /* background-color: ; */
+        background-image: url("/src/img/pomelo.jpg");
+        background-position: right;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: #ffffff;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruit Shop PH | About</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="icon" type="image/x-icon" href="src/img/box.png" />
+  </head>
+
+  <body class="bg-yellow-50">
+    <!-- hero -->
+    <section class="w-full h-auto hero bg-gray-700">
+      <header class="flex justify-between px-32 py-10 bg-gray-700 w-full">
+        <div class="flex">
+          <a class="text-orange-400 font-bold text-2xl" href="index.html"
+            >FruitShop PH
+          </a>
+        </div>
+        <nav>
+          <ul class="flex gap-10 mt-1">
+            <li>
+              <a
+                class="font-bold text-white hover:text-orange-600"
+                href="index.html"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-bold text-white hover:text-orange-600"
+                href="shop.php"
+                >Shop</a
+              >
+            </li>
+            <li>
+              <a
+                class="active font-bold hover:text-orange-600"
+                href="about.html"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-bold text-white hover:text-orange-600"
+                href="contact.html"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <div class="mt-2">
+          <a
+            href="#"
+            class="text-white px-4 py-2 border border-orange-600 rounded hover:bg-orange-600 transition-all duration-200 ease-linear"
+            >Sign up</a
+          >
+        </div>
+      </header>
+      <div
+        class="flex mt-14 flex-col justify-center items-center gap-4 bg-gray-700"
+      >
+        <h2 class="text-orange-600 font-bold text-xl">Fresh and Organic</h2>
+        <h1 class="font-bold text-6xl leading-relaxed text-white">About Us</h1>
+        <div class="mt-14"></div>
+      </div>
+    </section>
+    <!-- about -->
+    <section class="h-auto px-32 py-20 grid grid-cols-2 gap-10">
+      <div class="flex object-contain overflow-hidden rounded-sm">
+        <img src="src/img/fourseason.jpg" alt="fourseason" />
+      </div>
+      <div class="flex flex-col gap-4 h-full justify-center items-start">
+        <h2 class="text-xl text-gray-700">Since Year 2012</h2>
+        <h1 class="font-bold text-4xl text-gray-800">
+          We are <span class="text-orange-600">Fruit Shop PH</span>
+        </h1>
+        <p class="text-gray-600">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dolore
+          in asperiores reiciendis veniam fugiat harum nostrum consequatur
+          recusandae consectetur.
+        </p>
+        <p class="text-gray-600">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat,
+          voluptate.
+        </p>
+        <p class="text-gray-600">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
+          perspiciatis fugiat odio voluptatem dignissimos dicta.
+        </p>
+      </div>
+    </section>
+    <!-- promo -->
+    <section class="h-auto px-32 py-20 grid grid-cols-2 gap-10" id="promo2">
+      <div class="flex flex-col justify-center items-start h-full gap-8">
+        <h2 class="font-bold text-5xl text-gray-800 leading-snug">
+          December sale is on with
+          <span class="text-orange-600">big DISCOUNT!!!</span>
+        </h2>
+        <p class="text-2xl text-gray-700">
+          Sale up to
+          <span class="text-orange-600 font-bold text-5xl">50%</span> off
+        </p>
+        <div>
+          <a
+            href=""
+            class="rounded-md bg-orange-600 px-4 py-2 text-white font-semibold text-2xl"
+            >Shop now</a
+          >
+        </div>
+      </div>
+      <div></div>
+    </section>
+    <!-- our team -->
+    <section class="h-auto px-32 py-20 grid grid-cols-3 gap-10 bg-yellow-50">
+      <div class="rounded-md shadow-xl flex flex-col bg-yellow-50 gap-4">
+        <img class="rounded" src="src/img/belinda.jpg" alt="berry" />
+        <div class="flex flex-col justify-center items-center gap-2 px-5 pb-5">
+          <h1 class="font-bold text-xl text-gray-800">Belinda Smith</h1>
+          <p class="font-bold text-md text-gray-600">Farmer</p>
+        </div>
+      </div>
+      <div class="rounded-md shadow-xl flex flex-col bg-yellow-50 gap-4">
+        <img class="rounded" src="src/img/joe.jpg" alt="berry" />
+        <div class="flex flex-col justify-center items-center gap-2 px-5 pb-5">
+          <h1 class="font-bold text-xl text-gray-800">Joe Shmoe</h1>
+          <p class="font-bold text-md text-gray-600">Farmer</p>
+        </div>
+      </div>
+      <div class="rounded-md shadow-xl flex flex-col bg-yellow-50 gap-4">
+        <img class="rounded" src="src/img/kate.jpg" alt="berry" />
+        <div class="flex flex-col justify-center items-center gap-2 px-5 pb-5">
+          <h1 class="font-bold text-xl text-gray-800">Kate Smith</h1>
+          <p class="font-bold text-md text-gray-600">Farmer</p>
+        </div>
+      </div>
+    </section>
+    <!-- footer -->
+    <footer
+      class="h-auto px-32 py-20 grid grid-cols-4 gap-10 bg-gray-800 text-white"
+    >
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">FruitShop PH</h1>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+          consequatur ut accusantium facilis eos eaque iure, dolorum quam
+          commodi nulla!
+        </p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">Get in touch</h1>
+        <p>
+          <span><ion-icon name="location-outline"></ion-icon></span> Malolos,
+          Bulacan
+        </p>
+        <p>
+          <span><ion-icon name="mail-outline"></ion-icon></span>
+          fruitshopph@email.com
+        </p>
+        <p>
+          <span><ion-icon name="call-outline"></ion-icon></span> (123) 456-789
+        </p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">Pages</h1>
+        <ul>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>Home</a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>Shop</a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>About us</a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>Contact us</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">Subscribe</h1>
+        <p>Subscribe to our mailing list to get the latest updates.</p>
+        <input
+          class="px-4 py-2 rounded"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="your@email.com"
+        />
+        <button class="font-bold rounded text-white py-2 bg-orange-600">
+          Subscribe
+        </button>
+      </div>
+    </footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

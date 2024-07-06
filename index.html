@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .hero {
+        background-image: url("src/img/background.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .body {
+        overflow-x: hidden;
+      }
+
+      .active {
+        color: #fb8047;
+      }
+
+      #promo {
+        background-color: #f6f6f6;
+      }
+
+      #promo2 {
+        /* background-color: ; */
+        background-image: url("/src/img/pomelo.jpg");
+        background-position: right;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: #ffffff;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruit Shop PH</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="icon" type="image/x-icon" href="src/img/box.png" />
+  </head>
+
+  <body class="bg-yellow-50">
+    <!-- hero -->
+    <section class="w-full h-screen hero">
+      <header class="flex justify-between px-32 py-10 bg-gray-700 w-full">
+        <div class="flex">
+          <a class="text-orange-400 font-bold text-2xl" href="index.html"
+            >FruitShop PH
+          </a>
+        </div>
+        <nav>
+          <ul class="flex gap-10 mt-1">
+            <li><a class="active font-bold" href="index.html">Home</a></li>
+            <li>
+              <a
+                class="font-bold text-white hover:text-orange-600"
+                href="shop.php"
+                >Shop</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-bold text-white hover:text-orange-600"
+                href="about.html"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-bold text-white hover:text-orange-600"
+                href="contact.html"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <div class="mt-2">
+          <a
+            href="#"
+            class="text-white px-4 py-2 border border-orange-600 rounded hover:bg-orange-600 transition-all duration-200 ease-linear"
+            >Sign up</a
+          >
+        </div>
+      </header>
+      <div class="flex mt-32 flex-col justify-center items-center gap-4">
+        <h2 class="text-orange-600 font-bold text-xl">Fresh and Organic</h2>
+        <h1 class="font-bold text-6xl leading-relaxed text-gray-800">
+          Delicious Seasonal Fruits
+        </h1>
+        <div class="flex gap-4 mt-2">
+          <a
+            href="#"
+            class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200"
+            >Fruit collection</a
+          >
+          <a
+            href="#"
+            class="text-md text-orange-600 font-semibold border px-4 py-3 border-orange-600 rounded-xl hover:text-white hover:bg-orange-600 transition-all ease-linear duration-200"
+            >Contact us</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- section -->
+    <section
+      class="h-auto flex px-32 py-20 justify-between gap-10 bg-yellow-50"
+    >
+      <div class="flex justify-center items-center gap-5">
+        <img
+          class="p-3 border-2 border-orange-600 rounded-full w-1/4"
+          src="src/img/delivery.png"
+          alt="delivery"
+        />
+        <div>
+          <h1 class="font-bold text-lg text-gray-800">Free shipping</h1>
+          <p class="text-gray-600">When order over 10,000&#x20B1;</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center gap-5">
+        <img
+          class="p-3 border-2 border-orange-600 rounded-full w-1/4"
+          src="src/img/viber.png"
+          alt="delivery"
+        />
+        <div>
+          <h1 class="font-bold text-lg text-gray-800">24/7 Support</h1>
+          <p class="text-gray-600">Get support all day</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center gap-5">
+        <img
+          class="p-3 border-2 border-orange-600 rounded-full w-1/4"
+          src="src/img/refund.png"
+          alt="delivery"
+        />
+        <div>
+          <h1 class="font-bold text-lg text-gray-800">Refund</h1>
+          <p class="text-gray-600">Get refund within 3 days</p>
+        </div>
+      </div>
+    </section>
+    <!-- products -->
+    <section
+      class="h-auto px-32 py-20 flex flex-col justify-center items-center text-center gap-4 bg-yellow-50"
+      id="product"
+    >
+      <h1 class="font-bold text-5xl text-orange-600 leading-normal">
+        Our <span class="text-gray-800">Products</span>
+      </h1>
+      <p class="text-lg text-gray-600 w-3/5">
+        Remember to savor these seasonal delights and explore our product for
+        the freshest picks.
+      </p>
+      <div class="grid grid-cols-3 gap-10 mt-14">
+        <div class="rounded-md shadow-xl bg-white flex flex-col">
+          <img src="src/img/berry.jpg" alt="berry" />
+          <div class="flex flex-col gap-2 px-5 pb-5">
+            <h1 class="font-bold text-xl text-gray-800">Berry</h1>
+            <p class="text-md text-gray-600">Per kg</p>
+            <h1 class="text-2xl font-bold text-gray-800">500&#x20B1;</h1>
+            <a
+              href="#"
+              class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200"
+              >Shop now</a
+            >
+          </div>
+        </div>
+        <div class="rounded-md shadow-xl bg-white flex flex-col">
+          <img src="src/img/lemon.jpg" alt="lemon" />
+          <div class="flex flex-col gap-2 px-5 pb-5">
+            <h1 class="font-bold text-xl text-gray-800">Lemon</h1>
+            <p class="text-md text-gray-600">Per kg</p>
+            <h1 class="text-2xl font-bold text-gray-800">150&#x20B1;</h1>
+            <a
+              href="#"
+              class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200"
+              >Shop now</a
+            >
+          </div>
+        </div>
+        <div class="rounded-md shadow-xl bg-white flex flex-col">
+          <img src="src/img/strawberry.jpg" alt="berry" />
+          <div class="flex flex-col gap-2 px-5 pb-5">
+            <h1 class="font-bold text-xl text-gray-800">Strawberry</h1>
+            <p class="text-md text-gray-600">Per kg</p>
+            <h1 class="text-2xl font-bold text-gray-800">250&#x20B1;</h1>
+            <a
+              href="#"
+              class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200"
+              >Shop now</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- promo -->
+    <section class="h-auto px-32 py-20 grid grid-cols-2 gap-10" id="promo">
+      <div class="flex">
+        <img src="/src/img/promo.jpg" alt="promo" />
+      </div>
+      <div class="flex flex-col justify-start items-start gap-5">
+        <h1 class="font-bold text-orange-600 text-5xl">
+          Deal <span class="text-gray-800">of the month</span>
+        </h1>
+        <h2 class="font-semibold text-gray-700 text-2xl">
+          All star strawberry
+        </h2>
+        <p class="text-gray-600">
+          June-bearing strawberries form flower buds in late summer to early
+          fall when the day length is less than 10 hours per day. These flowers
+          bloom in early spring, then produce an abundance of large, juicy
+          berries in spring.
+        </p>
+        <div class="py-5">
+          <a
+            href="#"
+            class="rounded-xl px-5 py-2 bg-orange-600 text-white font-semibold text-2xl"
+            >Shop now</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- about -->
+    <section class="h-auto px-32 py-20 grid grid-cols-2 gap-10">
+      <div class="flex object-contain overflow-hidden rounded-sm">
+        <img src="src/img/fourseason.jpg" alt="fourseason" />
+      </div>
+      <div class="flex flex-col gap-4 h-full justify-center items-start">
+        <h2 class="text-xl text-gray-700">Since Year 2012</h2>
+        <h1 class="font-bold text-4xl text-gray-800">
+          We are <span class="text-orange-600">Fruit Shop PH</span>
+        </h1>
+        <p class="text-gray-600">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dolore
+          in asperiores reiciendis veniam fugiat harum nostrum consequatur
+          recusandae consectetur.
+        </p>
+        <p class="text-gray-600">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat,
+          voluptate.
+        </p>
+        <a
+          class="py-2 bg-orange-600 font-semibold text-white rounded px-4"
+          href="about.html"
+          >Know more</a
+        >
+      </div>
+    </section>
+    <!-- promo -->
+    <section class="h-auto px-32 py-20 grid grid-cols-2 gap-10" id="promo2">
+      <div class="flex flex-col justify-center items-start h-full gap-8">
+        <h2 class="font-bold text-5xl text-gray-800 leading-snug">
+          December sale is on with
+          <span class="text-orange-600">big DISCOUNT!!!</span>
+        </h2>
+        <p class="text-2xl text-gray-700">
+          Sale up to
+          <span class="text-orange-600 font-bold text-5xl">50%</span> off
+        </p>
+        <div>
+          <a
+            href=""
+            class="rounded-md bg-orange-600 px-4 py-2 text-white font-semibold text-2xl"
+            >Shop now</a
+          >
+        </div>
+      </div>
+      <div></div>
+    </section>
+    <!-- footer -->
+    <footer
+      class="h-auto px-32 py-20 grid grid-cols-4 gap-10 bg-gray-800 text-white"
+    >
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">FruitShop PH</h1>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+          consequatur ut accusantium facilis eos eaque iure, dolorum quam
+          commodi nulla!
+        </p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">Get in touch</h1>
+        <p>
+          <span><ion-icon name="location-outline"></ion-icon></span> Malolos,
+          Bulacan
+        </p>
+        <p>
+          <span><ion-icon name="mail-outline"></ion-icon></span>
+          fruitshopph@email.com
+        </p>
+        <p>
+          <span><ion-icon name="call-outline"></ion-icon></span> (123) 456-789
+        </p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">Pages</h1>
+        <ul>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>Home</a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>Shop</a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>About us</a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><ion-icon name="caret-forward-outline"></ion-icon>Contact us</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl text-orange-600">Subscribe</h1>
+        <p>Subscribe to our mailing list to get the latest updates.</p>
+        <input
+          class="px-4 py-2 rounded"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="your@email.com"
+        />
+        <button class="font-bold rounded text-white py-2 bg-orange-600">
+          Subscribe
+        </button>
+      </div>
+    </footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
