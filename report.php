@@ -1,25 +1,9 @@
 <?php
 include 'session.php';
 include 'connection.php';
-if (isset($_POST['edit'])) {
-    $fruit_id = $_POST['fruit_id'];
-    $sql = "SELECT * FROM fruits WHERE fruit_id = $fruit_id";
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_assoc($result);
-}
-if (isset($_POST['update'])) {
-    $fruit_name = $_POST['fruit_name'];
-    $price = $_POST['price'];
-    $quantity = $_POST['quantity'];
-    $fruit_id = $_POST['fruit_id'];
-    echo $fruit_name;
-    echo $price;
-    echo $quantity;
-    $sql = "UPDATE fruits SET fruit_name = '$fruit_name', price = $price, quantity = $quantity WHERE fruit_id = $fruit_id";
-    mysqli_query($connection, $sql);
-    echo "<script>alert('Fruit updated successfully.');</script>";
-    echo "<script>window.location.href= 'dashboard.php';</script>";
-}
+$sql = 'SELECT * FROM fruits';
+$result = mysqli_query($connection, $sql);
+$row = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +11,7 @@ if (isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit Shop PH | Update Fruit</title>
+    <title>Fruit Shop PH | Create Order</title>
     <link rel="icon" type="image/x-icon" href="src/img/box.png" />
     <link rel="stylesheet" href="src/output.css">
     <style>
@@ -99,7 +83,21 @@ if (isset($_POST['update'])) {
 
         #dropdown-container {
             background-color: #52524C;
-            display: none;
+            display: block;
+        }
+
+        #buy {
+            width: 80px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        img {
+            width: 95%;
         }
     </style>
 </head>
@@ -110,7 +108,7 @@ if (isset($_POST['update'])) {
         <nav class="col-span-2 bg-gray-700 flex flex-col justify-start items-center gap-10">
             <h1 class=" text-2xl font-bold text-white mt-10">Fruit Shop PH</h1>
             <ul>
-                <li><a class="active transition-all duration-200 ease-linear" href="dashboard.php"><ion-icon name="cube-outline"></ion-icon><span>Dashboard</span></a></li>
+                <li><a class=" transition-all duration-200 ease-linear" href="dashboard.php"><ion-icon name="cube-outline"></ion-icon><span>Dashboard</span></a></li>
                 <li><a class=" transition-all duration-200 ease-linear" href="addfruit.php"><ion-icon name="add-circle-outline"></ion-icon><span>Add Fruit</span></a></li>
                 <li><button onclick="showLink()" class=" transition-all duration-200 ease-linear"><ion-icon name="bag-outline"></ion-icon><span>Order <ion-icon name="chevron-down-outline"></ion-icon></span></button></li>
                 <div class=" transition-all duration-200 ease-linear" id="dropdown-container">
@@ -121,7 +119,7 @@ if (isset($_POST['update'])) {
                     </ul>
                 </div>
                 <li><a class=" transition-all duration-200 ease-linear" href="account.php"><ion-icon name="settings-outline"></ion-icon><span>Account</span></a></li>
-                <li><a class=" transition-all duration-200 ease-linear" href="report.php"><ion-icon name="chatbox-outline"></ion-icon><span>Report Bug</span></a></li>
+                <li><a class="active transition-all duration-200 ease-linear" href="report.php"><ion-icon name="chatbox-outline"></ion-icon><span>Report Bug</span></a></li>
             </ul>
         </nav>
         <!-- content -->
@@ -133,41 +131,38 @@ if (isset($_POST['update'])) {
                 </form>
             </div>
             <hr>
-            <h1 class="py-5 font-bold text-2xl text-gray-800">Fruit Details</h1>
-            <div class="grid grid-cols-4">
-                <form class="col-span-3 grid grid-cols-2 gap-5" action="update.php" method="post">
-                    <div class="flex flex-col">
-                        <label for="fruit_name">Fruit Name</label>
-                        <input class="border rounded px-4 py-2" type="text" name="fruit_name" id="fruit_name" value="<?php echo $row['fruit_name'] ?>">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="price">Price</label>
-                        <input class="border rounded px-4 py-2" type="number" name="price" id="price" value="<?php echo $row['price'] ?>">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="quantity">Quantity(kg)</label>
-                        <input class="border rounded px-4 py-2" type="number" name="quantity" id="quantity" value="<?php echo $row['quantity'] ?>">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="price">Upload Image <span class="font-sm text-gray-600"> ("This part is under construction")</span></label>
-                        <input class="border rounded px-4 py-2" type="file" name="upload_image" id="upload_image">
-                    </div>
-                    <button type="submit" name="update" class="bg-blue-400 py-2 rounded font-bold text-white">Update Fruit</button>
-                    <input type="hidden" name="fruit_id" id="fruit_id" value="<?php echo $row['fruit_id'] ?>">
-                </form>
+            <div class="grid grid-cols-2 gap-4">
+                <h1 class="py-5 font-bold text-2xl text-gray-800">Report Bug</h1>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="col-span-2 flex justify-center items-center flex-col gap-4">
+                    <form class="w-full grid gap-4" action="" method="">
+                        <div class="flex flex-col">
+                            <label for="full_name">Full Name</label>
+                            <input class="border rounded px-4 py-2" type="text" name="full_name" id="full_name" placeholder="e.g 'Joe Shmoe'">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="email">Email</label>
+                            <input class="border rounded px-4 py-2" type="email" name="email" id="email" placeholder="your@emial.com">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="subject">Subject</label>
+                            <input class="border rounded px-4 py-2" type="text" name="subject" id="subject" placeholder="Enter subject">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="message">Message</label>
+                            <textarea name="message" rows="5" id="message" class="border rounded px-4 py-2" placeholder="Your message here..."></textarea>
+                        </div>
+                        <button type="submit" name="" class="bg-blue-400 py-2 rounded font-bold text-white">Send Report</button>
+                    </form>
+                </div>
+                <div class="col-span-2">
+                    <img src="/src/img/report.png" alt="construction">
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        function showLink() {
-            let dropdown = document.getElementById('dropdown-container');
-            if (dropdown.style.display === 'block') {
-                dropdown.style.display = 'none';
-            } else {
-                dropdown.style.display = 'block';
-            }
-        }
-    </script>
+    <script src="/src/js/createorder.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

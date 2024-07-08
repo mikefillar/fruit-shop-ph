@@ -63,6 +63,28 @@ $stock = mysqli_fetch_array($result5);
             font-size: 1.2rem;
         }
 
+        nav ul li button {
+            display: flex;
+            width: 100%;
+            justify-content: start;
+            align-items: center;
+            padding: 10px 0;
+            color: white;
+        }
+
+        nav ul li button ion-icon {
+            width: 30%;
+            font-size: 1.5rem;
+        }
+
+        nav ul li button span {
+            width: 70%;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .active {
             border-left: 15px solid white;
             background-color: gray;
@@ -71,6 +93,16 @@ $stock = mysqli_fetch_array($result5);
         nav ul li a:hover {
             border-left: 15px solid white;
             background-color: gray;
+        }
+
+        nav ul li button:hover {
+            border-left: 15px solid white;
+            background-color: gray;
+        }
+
+        #dropdown-container {
+            background-color: #52524C;
+            display: none;
         }
     </style>
 </head>
@@ -83,8 +115,16 @@ $stock = mysqli_fetch_array($result5);
             <ul>
                 <li><a class="active transition-all duration-200 ease-linear" href="dashboard.php"><ion-icon name="cube-outline"></ion-icon><span>Dashboard</span></a></li>
                 <li><a class=" transition-all duration-200 ease-linear" href="addfruit.php"><ion-icon name="add-circle-outline"></ion-icon><span>Add Fruit</span></a></li>
-                <li><a class=" transition-all duration-200 ease-linear" href=""><ion-icon name="settings-outline"></ion-icon><span>Account</span></a></li>
-                <li><a class=" transition-all duration-200 ease-linear" href=""><ion-icon name="chatbox-outline"></ion-icon><span>Report Bug</span></a></li>
+                <li><button onclick="showLink()" class=" transition-all duration-200 ease-linear"><ion-icon name="bag-outline"></ion-icon><span>Order <ion-icon name="chevron-down-outline"></ion-icon></span></button></li>
+                <div class=" transition-all duration-200 ease-linear" id="dropdown-container">
+                    <ul>
+                        <li><a class=" transition-all duration-200 ease-linear" href="createorder.php"><ion-icon name="bag-add-outline"></ion-icon><span>Create </span></a></li></a></li>
+                        <li><a class=" transition-all duration-200 ease-linear" href="pendingorder.php"><ion-icon name="bag-handle-outline"></ion-icon><span>Pending </span></a></li></a></li>
+                        <li><a class=" transition-all duration-200 ease-linear" href="completeorder.php"><ion-icon name="bag-check-outline"></ion-icon><span>Complete </span></a></li></a></li>
+                    </ul>
+                </div>
+                <li><a class=" transition-all duration-200 ease-linear" href="account.php"><ion-icon name="settings-outline"></ion-icon><span>Account</span></a></li>
+                <li><a class=" transition-all duration-200 ease-linear" href="report.php"><ion-icon name="chatbox-outline"></ion-icon><span>Report Bug</span></a></li>
             </ul>
         </nav>
         <!-- content -->
@@ -121,7 +161,7 @@ $stock = mysqli_fetch_array($result5);
                             <p><?php echo $stock[0] - 1 ?></p>
                         </div>
                     </div>
-                    <table class="table-auto text-center col-span-3 overflow-y-scroll bourder rounded">
+                    <table class="table-auto text-center col-span-3 overflow-y-scroll">
                         <thead>
                             <tr class="bg-gray-800 text-white">
                                 <th>ID</th>
@@ -160,12 +200,28 @@ $stock = mysqli_fetch_array($result5);
                 </div>
                 <!-- request -->
                 <div>
-                    <h1></h1>
+                    <div class="border border-blue-400 rounded flex gap-4 justify-center items-center py-2">
+                        <div class="mt-1">
+                            <span class="text-xl"><ion-icon name="alert-circle-outline"></ion-icon></span>
+                        </div>
+                        <div class="col-span-2">
+                            <p>No pending request</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script>
+        function showLink() {
+            let dropdown = document.getElementById('dropdown-container');
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+            } else {
+                dropdown.style.display = 'block';
+            }
+        }
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
