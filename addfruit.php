@@ -118,7 +118,8 @@ include 'createfruit.php';
             <h1 class="py-5 font-bold text-2xl text-gray-800">Add Fruit</h1>
             <div class="grid grid-cols-4">
                 <p class="col-span-3 rounded px-4 <?php echo $style ?>"><?php echo $message ?></p>
-                <form class="col-span-3 grid grid-cols-2 gap-5" action="createfruit.php" method="post">
+                <!-- adding image using enctype -->
+                <form class="col-span-3 grid grid-cols-2 gap-5" action="createfruit.php" method="post" enctype="multipart/form-data">
                     <div class="flex flex-col">
                         <label for="fruit_name">Fruit Name</label>
                         <input class="border rounded px-4 py-2" type="text" name="fruit_name" id="fruit_name" placeholder="Enter fruit name" required>
@@ -132,8 +133,8 @@ include 'createfruit.php';
                         <input class="border rounded px-4 py-2" type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
                     </div>
                     <div class="flex flex-col">
-                        <label for="price">Upload Image <span class="font-sm text-gray-600"> ("This part is under construction")</span></label>
-                        <input class="border rounded px-4 py-2" type="file" name="upload_image" id="upload_image">
+                        <label for="imageurl">Upload Image</label>
+                        <input class="border rounded px-4 py-2" type="file" name="imageurl" accept="image/png, image/jpg, image/jpeg" id="imageurl">
                     </div>
                     <button type="submit" name="add" class="bg-blue-400 py-2 rounded font-bold text-white">Add Fruit</button>
                 </form>

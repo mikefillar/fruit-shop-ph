@@ -12,10 +12,16 @@ if (isset($_POST['update'])) {
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
     $fruit_id = $_POST['fruit_id'];
+    $imageurl = $_FILES['imageurl']['name'];
+    //temporary image name
+    $imageurltemp = $_FILES['imageurl']['tmp_name'];
+    //imagefolder
+    $imagefolder = 'src/img/' . $imageurl;
     echo $fruit_name;
     echo $price;
     echo $quantity;
-    $sql = "UPDATE fruits SET fruit_name = '$fruit_name', price = $price, quantity = $quantity WHERE fruit_id = $fruit_id";
+    $sql = "UPDATE fruits SET fruit_name = '$fruit_name', price = $price, quantity = $quantity, imageurl = '$imageurl' WHERE fruit_id = $fruit_id";
+    move_uploaded_file($imageurltemp, $imagefolder);
     mysqli_query($connection, $sql);
     echo "<script>alert('Fruit updated successfully.');</script>";
     echo "<script>window.location.href= 'dashboard.php';</script>";
@@ -135,7 +141,10 @@ if (isset($_POST['update'])) {
             <hr>
             <h1 class="py-5 font-bold text-2xl text-gray-800">Fruit Details</h1>
             <div class="grid grid-cols-4">
-                <form class="col-span-3 grid grid-cols-2 gap-5" action="update.php" method="post">
+                <div class="col-span-4 flex justify-center items-center">
+                    <img src="src/img/<?php echo $row['imageurl'] ?>" alt="<?php echo $row['imageurl'] ?>">
+                </div>
+                <form class="col-span-3 grid grid-cols-2 gap-5" action="update.php" method="post" enctype="multipart/form-data">
                     <div class="flex flex-col">
                         <label for="fruit_name">Fruit Name</label>
                         <input class="border rounded px-4 py-2" type="text" name="fruit_name" id="fruit_name" value="<?php echo $row['fruit_name'] ?>">
@@ -149,8 +158,8 @@ if (isset($_POST['update'])) {
                         <input class="border rounded px-4 py-2" type="number" name="quantity" id="quantity" value="<?php echo $row['quantity'] ?>">
                     </div>
                     <div class="flex flex-col">
-                        <label for="price">Upload Image <span class="font-sm text-gray-600"> ("This part is under construction")</span></label>
-                        <input class="border rounded px-4 py-2" type="file" name="upload_image" id="upload_image">
+                        <label for="imageurl">Upload Image</label>
+                        <input class="border rounded px-4 py-2" type="file" name="imageurl" id="imageurl" accept="image/png, image/jpg, image/jpeg" value="<?php echo $row['imageurl'] ?>">
                     </div>
                     <button type="submit" name="update" class="bg-blue-400 py-2 rounded font-bold text-white">Update Fruit</button>
                     <input type="hidden" name="fruit_id" id="fruit_id" value="<?php echo $row['fruit_id'] ?>">

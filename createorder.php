@@ -95,6 +95,10 @@ $row = mysqli_fetch_array($result);
             -webkit-appearance: none;
             margin: 0;
         }
+
+        img {
+            width: 95%;
+        }
     </style>
 </head>
 
@@ -129,9 +133,9 @@ $row = mysqli_fetch_array($result);
             <hr>
             <div class="grid grid-cols-2 gap-4">
                 <h1 class="py-5 font-bold text-2xl text-gray-800">Create Order</h1>
-                <h1 class="py-5 font-bold text-2xl text-gray-800">Check Out</h1>
+                <!-- <h1 class="py-5 font-bold text-2xl text-gray-800">Check Out</h1> -->
             </div>
-            <div class="grid grid-cols-4 gap-4">
+            <!-- <div class="grid grid-cols-4 gap-4">
                 <div class="col-span-2">
                     <table class="creare-order table-auto text-center w-full overflow-y-scroll">
                         <thead>
@@ -171,6 +175,15 @@ $row = mysqli_fetch_array($result);
                             </thead>
                         </table>
                     </form>
+                </div>
+            </div> -->
+            <div class="grid grid-cols-4 gap-4">
+                <div class="col-span-2 flex justify-center items-center flex-col gap-4">
+                    <h1 class="text-gray-800 text-4xl font-bold">This page is under constuction</h1>
+                    <p class="text-xl font-semibold text-gray-600">Contact the owner for more information</p>
+                </div>
+                <div class="col-span-2">
+                    <img src="/src/img/construction.png" alt="construction">
                 </div>
             </div>
         </div>

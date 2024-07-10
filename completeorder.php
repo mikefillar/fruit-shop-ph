@@ -1,9 +1,8 @@
 <?php
 include 'session.php';
 include 'connection.php';
-$sql = 'SELECT * FROM fruits';
+$sql = "SELECT * FROM orders WHERE order_status = 'Complete'";
 $result = mysqli_query($connection, $sql);
-$row = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,10 +94,6 @@ $row = mysqli_fetch_array($result);
             -webkit-appearance: none;
             margin: 0;
         }
-
-        img {
-            width: 95%;
-        }
     </style>
 </head>
 
@@ -134,13 +129,45 @@ $row = mysqli_fetch_array($result);
             <div class="grid grid-cols-2 gap-4">
                 <h1 class="py-5 font-bold text-2xl text-gray-800">Complete Order</h1>
             </div>
-            <div class="grid grid-cols-4 gap-4">
-                <div class="col-span-2 flex justify-center items-center flex-col gap-4">
-                    <h1 class="text-gray-800 text-4xl font-bold">This page is under constuction</h1>
-                    <p class="text-xl font-semibold text-gray-600">Contact the owner for more information</p>
-                </div>
-                <div class="col-span-2">
-                    <img src="/src/img/construction.png" alt="construction">
+            <div class="grid">
+                <div>
+                    <?php if (mysqli_num_rows($result) < 0) {
+                        echo "<h1 class='text-xl text-gray-800' >No completed order/s available.</h1>";
+                    } else { ?>
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Date/Time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row['fruit_name'] ?></td>
+                                        <td class="flex justify-center items-center"><img width="100px" src="src/img/<?php echo $row['imageurl'] ?>" alt="<?php echo $row['imageurl'] ?>"></td>
+                                        <td><?php echo $row['price'] ?></td>
+                                        <td><?php echo $row['quantity'] ?></td>
+                                        <td><?php echo $row['total'] ?></td>
+                                        <td><?php echo $row['order_status'] ?></td>
+                                        <td><?php echo $row['date_updated'] ?></td>
+                                        <td><a onclick="return confirm('Complete this order?')" class="text-xl" href="pendingorder.php?complete=<?php echo $row['order_id'] ?>"><ion-icon name="checkmark-outline"></ion-icon></a><a class="text-xl" href="#"><ion-icon name="close-outline"></ion-icon></a></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php
+                    } ?>
                 </div>
             </div>
         </div>

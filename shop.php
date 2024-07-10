@@ -3,6 +3,11 @@ include 'connection.php';
 $sql = 'SELECT * FROM fruits';
 $result = mysqli_query($connection, $sql) or trigger_error("Failed SQL" . mysqli_error($connection, E_USER_ERROR));
 $row = mysqli_fetch_array($result);
+//cart
+$sql2 = 'SELECT * FROM cart';
+$result2 = mysqli_query($connection, $sql2) or trigger_error("Failed SQL" . mysqli_error($connection, E_USER_ERROR));
+$count = mysqli_num_rows($result2) - 1;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,10 +21,20 @@ $row = mysqli_fetch_array($result);
         .active {
             color: #fb8047;
         }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #quantity {
+            width: 50px;
+        }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fruit Shop PH | About</title>
+    <title>Fruit Shop PH | Shop</title>
     <link rel="stylesheet" href="/src/output.css" />
     <link rel="icon" type="image/x-icon" href="src/img/box.png" />
 </head>
@@ -41,7 +56,7 @@ $row = mysqli_fetch_array($result);
                 </ul>
             </nav>
             <div class="mt-2">
-                <a href="#" class="text-white px-4 py-2 border border-orange-600 rounded hover:bg-orange-600 transition-all duration-200 ease-linear">Sign up</a>
+                <a href="viewcart.php" class="text-white text-xl"><ion-icon name="cart"></ion-icon><sup><?php echo $count ?></sup></a>
             </div>
         </header>
         <div class="flex mt-14 flex-col justify-center items-center gap-4 bg-gray-700">
@@ -65,15 +80,28 @@ $row = mysqli_fetch_array($result);
             <?php
             while ($row = mysqli_fetch_array($result)) {
             ?>
-                <div class="rounded-md shadow-xl bg-white flex flex-col">
-                    <img src="src/img/fruits.jpg" alt="fruits" />
-                    <div class="flex flex-col gap-2 px-5 pb-5 mt-5">
-                        <h1 class="font-bold text-xl text-gray-800"><?php echo $row['fruit_name'] ?></h1>
-                        <p class="text-md text-gray-600">Per kg</p>
-                        <h1 class="text-2xl font-bold text-gray-800"> <?php echo $row['price'] ?> &#x20B1;</h1>
-                        <a href="shop.php" class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200">Order now</a>
+                <form class="" method="post" action="cart.php">
+                    <div class="rounded-md shadow-xl bg-white flex flex-col">
+                        <img src="/src/img/<?php echo $row['imageurl'] ?>" alt="<?php echo $row['imageurl'] ?>" />
+                        <div class="flex flex-col gap-2 px-5 pb-5 mt-5">
+                            <h1 class="font-bold text-xl text-gray-800"><?php echo $row['fruit_name'] ?></h1>
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <p class="text-sm text-gray-600"><?php echo $row['quantity'] ?> kg available</p>
+                                    <h1 class="text-xl font-bold text-gray-800">&#x20B1; <?php echo $row['price'] ?>/kg</h1>
+                                </div>
+                                <div>
+                                    <p class="text-md text-gray-600">Quantity</p>
+                                    <input class="border border-gray-600 rounded text-center" type="number" name="quantity" id="quantity" min="1" value="1">
+                                </div>
+                            </div>
+                            <input type="hidden" name="fruit_name" id="fruit_name" value="<?php echo $row['fruit_name'] ?>">
+                            <input type="hidden" name="price" id="price" value="<?php echo $row['price'] ?>">
+                            <input type="hidden" name="imageurl" id="imageurl" value="<?php echo $row['imageurl'] ?>">
+                            <button onclick="return confirm('Add this fruit to cart?.')" name="cart" type="submit" class="bg-orange-600 font-semibold text-white text-md px-4 py-3 rounded-xl hover:text-orange-600 hover:bg-gray-700 transition-all ease-linear duration-200">Add to cart</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             <?php
             }
             ?>

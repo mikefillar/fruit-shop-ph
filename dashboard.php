@@ -4,7 +4,7 @@ include 'connection.php';
 //fruits data
 $sql = 'SELECT * FROM fruits';
 $result = mysqli_query($connection, $sql) or trigger_error("Failed SQL" . mysqli_error($connection, E_USER_ERROR));
-$row = mysqli_fetch_array($result);
+$row = mysqli_fetch_assoc($result);
 //count fruits data
 $sql2 = 'SELECT COUNT(*) FROM fruits';
 $result2 = mysqli_query($connection, $sql2);
@@ -23,6 +23,9 @@ $total = $price[0] * $quantity[0];
 $sql5 = 'SELECT COUNT(quantity) FROM fruits WHERE quantity <= 10';
 $result5 = mysqli_query($connection, $sql5);
 $stock = mysqli_fetch_array($result5);
+//pending request
+$sqlPending = "SELECT * FROM orders WHERE order_status = 'Pending' ORDER BY date_created DESC";
+$order_result = mysqli_query($connection, $sqlPending);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,7 +167,7 @@ $stock = mysqli_fetch_array($result5);
                     <table class="table-auto text-center col-span-3 overflow-y-scroll">
                         <thead>
                             <tr class="bg-gray-800 text-white">
-                                <th>ID</th>
+                                <th>Sl No</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity(kg)</th>
@@ -174,11 +177,13 @@ $stock = mysqli_fetch_array($result5);
                         </thead>
                         <tbody>
                             <?php
+                            $id = 1;
                             while ($row = mysqli_fetch_array($result)) {
+
                             ?>
                                 <tr class="border-b <?php $style = $row['quantity'] <= 10 ? 'bg-red-500 text-white' : '';
                                                     echo $style; ?>">
-                                    <td> <?php echo $row['fruit_id'] ?> </td>
+                                    <td> <?php echo $id ?> </td>
                                     <td> <?php echo $row['fruit_name'] ?> </td>
                                     <td> <?php echo $row['price'] ?> </td>
                                     <td> <?php echo $row['quantity'] ?> </td>
@@ -194,20 +199,37 @@ $stock = mysqli_fetch_array($result5);
                                         </form>
                                     </td>
                                 </tr>
+                                <?php $id++; ?>
                             <?php } ?>
                         </tbody>
                     </table>
                 </div>
                 <!-- request -->
                 <div>
-                    <div class="border border-blue-400 rounded flex gap-4 justify-center items-center py-2">
-                        <div class="mt-1">
-                            <span class="text-xl"><ion-icon name="alert-circle-outline"></ion-icon></span>
+                    <?php if (mysqli_num_rows($order_result) < 1) {
+                        echo "<div class='border border-blue-400 rounded flex gap-4 justify-center items-center py-2'>
+                        <div class='mt-1'>
+                            <span class='text-xl'><ion-icon name='alert-circle-outline'></ion-icon></span>
                         </div>
-                        <div class="col-span-2">
+                        <div class='col-span-2'>
                             <p>No pending request</p>
                         </div>
-                    </div>
+                        </div>";
+                    } else {
+                    ?>
+                        <h1 class="text-xl font-bold">Incoming order</h1>
+                        <div class='border border-blue-400 rounded grid grid-cols-2 py-2'>
+                            <?php while ($pending_order = mysqli_fetch_assoc($order_result)) {
+                            ?>
+                                <p><span><?php echo $pending_order['quantity'] ?>kg </span><b><?php echo $pending_order['fruit_name'] ?></b></p>
+                                <p><?php echo $pending_order['date_created'] ?></p>
+                            <?php
+                            } ?>
+                        </div>
+                    <?php
+                    } ?>
+
+
                 </div>
             </div>
         </div>
